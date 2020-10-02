@@ -50,19 +50,18 @@ class CategoryController extends Controller
         $category = $this->category->find($id);
         $htmlOption =$this->getCategory($category->parent_id);
         
-        return view( 'category.edit', compact('category', 'htmlOption') );
+        return view( 'admin.category.edit', compact('category', 'htmlOption') );
     }
     public function delete($id){
         $this->category->find($id)->delete();
         return redirect()->route('categories.index');
     }
     public function update($id, Request $request){
-        $this->category->create([
+        $this->category->find($id)->update([
             'name'=>$request->name,
             'parent_id'=> $request->parent_id,
-            'slug'=> Str::slug($request->name, '-'),
+            'slug'=> Str::slug($request->name, '--'),
         ]);
         return redirect()->route('categories.index');
     }
-
 }

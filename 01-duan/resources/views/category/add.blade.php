@@ -16,8 +16,8 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-4">
-                    <form action="{{route('categories.store')}}" method="post">
-                        @csrf
+                    <form action="{{route('categories.store')}}" method="POST">
+                        {{ csrf_field() }}
                         <div class="form-group">
                             <label>Tên danh mục</label>
                             <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="name" placeholder="Nhập tên danh mục">

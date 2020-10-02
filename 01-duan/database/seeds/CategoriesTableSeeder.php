@@ -2,7 +2,7 @@
 
 use App\Category;
 use Illuminate\Database\Seeder;
-
+use App\User;
 class CategoriesTableSeeder extends Seeder
 {
     /**
@@ -14,9 +14,9 @@ class CategoriesTableSeeder extends Seeder
     {
         //
         Category::create([
-            'name' => 'category-2-1',
-            'parent_id' =>'2',
-            'slug' => 'category-2-1-1'
+            // 'name' => 'category-2-1',
+            // 'parent_id' =>'2',
+            // 'slug' => 'category-2-1-1'
         ]);
     }
 }

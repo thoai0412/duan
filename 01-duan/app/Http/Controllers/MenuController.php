@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Menu;
 use Illuminate\Http\Request;
 use App\Components\MenuRecusive;
+use Illuminate\Support\Str;
 
 
 class MenuController extends Controller
@@ -15,18 +16,19 @@ class MenuController extends Controller
      * @return \Illuminate\Http\Response
      */
     private $menuRecusive;
-    
-    public function __construct(MenuRecusive $menuRecusive)
+    private $menu;
+
+    public function __construct(MenuRecusive $menuRecusive, Menu $menu)
     {
         $this->menuRecusive = $menuRecusive;
+        $this->menu = $menu;
     }
 
 
     public function index()
     {
-        //
-        // dd('list menu');
-        return view('menus.index');
+        $menu = $this->menu->paginate(10);
+        return view('menus.index', compact('menu'));
     }
 
     /**
@@ -36,9 +38,8 @@ class MenuController extends Controller
      */
     public function create()
     {
-        $test=$this->menuRecusive->menuRecusiveAdd();
-        dd($test);
-        return view('menus.create');
+        $optionSelect = $this->menuRecusive->menuRecusiveAdd();
+        return view('menus.add', compact('optionSelect'));
     }
 
     /**
@@ -49,51 +50,33 @@ class MenuController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->menu->create([
+            'name' => $request->name,
+            'parent_id' => $request->parent_id,
+            'slug' => Str::slug($request->name, '-')
+        ]);
+        return redirect()->route('menus.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Menu  $menu
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Menu $menu)
+
+    public function edit($id, Request $request)
     {
-        //
+        $menuFollowIdEdit = $this->menu->find($id);
+        $optionSelect = $this->menuRecusive->menuRecusiveAdd($menuFollowIdEdit->parent_id);
+        return view('menus.edit', compact('optionSelect', 'menuFollowIdEdit'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Menu  $menu
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Menu $menu)
+    public function update($id, Request $request)
     {
-        //
+        $this->menu->find($id)->update([
+            'name'=>$request->name,
+            'parent_id'=> $request->parent_id,
+            'slug'=> Str::slug($request->name, '---'),
+        ]);
+        return redirect()->route('menus.index');
     }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Menu  $menu
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Menu $menu)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Menu  $menu
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Menu $menu)
-    {
-        //
+    public function delete($id){
+        $this->menu->find($id)->delete();
+        return redirect()->route('menus.index');
     }
 }
