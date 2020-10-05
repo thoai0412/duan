@@ -83,5 +83,18 @@ Route::prefix('admin')->group(function () {
             'as' => 'product.store',
             'uses' => 'ProductController@store'
         ]);
+        route::post('/update/{id}', [
+            'as' => 'product.update',
+            'uses' => 'ProductController@update'
+        ]);
+        route::get('/edit/{id}', [
+            'as' => 'product.edit',
+            'uses' => 'ProductController@edit'
+        ]);
+        route::get('/delete/{id}', [
+            'as' => 'product.delete',
+            'uses' => 'ProductController@delete'
+        ]);
+
     });
 });

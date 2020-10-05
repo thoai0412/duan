@@ -23,6 +23,7 @@ class CreateProductsTable extends Migration
             $table->string('user_id')->nullable();
             $table->integer('category_id');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

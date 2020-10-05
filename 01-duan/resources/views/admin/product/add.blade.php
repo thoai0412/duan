@@ -41,8 +41,6 @@
                             <input type="file" multiple class="form-control-file" name="image_path[]" placeholder="ảnh chi tiết">
                         </div>
 
-
-
                         <div class="form-group">
                             <label>Chọn danh mục</label>
                             <select class="form-control" name="parent_id">

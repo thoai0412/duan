@@ -11,11 +11,11 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        // User::create([
-        //     'name' => "kingdaica",
-        //     'email' => "kingdaica@gmail.com",
-        //     'password' => Hash::make('123456')
-        // ]);
+        User::create([
+            'name' => "kingdaica",
+            'email' => "kingdaica@gmail.com",
+            'password' => Hash::make('123456')
+        ]);
     }
 
 }
