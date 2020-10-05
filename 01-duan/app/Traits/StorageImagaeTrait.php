@@ -21,4 +21,15 @@ trait StorageImageTrait
         }
         return null;
     }
+    public function storageTraiUploadMutiple($file, $folderName)
+    {
+        $fileNameOrigin = $file->getClientOriginalName();
+        $fileNameHash = str_random(10) . '.' . $file->getClientOriginalExtension();
+        $filePath = $file->storeAs('public/' . $folderName . '/' . auth()->id(), $fileNameHash);
+        $dataUploadTrait = [
+            'file_name' => $fileNameOrigin,
+            'file_path' => Storage::url($filePath)
+        ];
+        return $dataUploadTrait;
+    }
 }

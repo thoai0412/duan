@@ -28,7 +28,7 @@ class MenuController extends Controller
     public function index()
     {
         $menu = $this->menu->paginate(10);
-        return view('menus.index', compact('menu'));
+        return view('admin.menus.index', compact('menu'));
     }
 
     /**
@@ -39,7 +39,7 @@ class MenuController extends Controller
     public function create()
     {
         $optionSelect = $this->menuRecusive->menuRecusiveAdd();
-        return view('menus.add', compact('optionSelect'));
+        return view('admin.menus.add', compact('optionSelect'));
     }
 
     /**
@@ -63,7 +63,7 @@ class MenuController extends Controller
     {
         $menuFollowIdEdit = $this->menu->find($id);
         $optionSelect = $this->menuRecusive->menuRecusiveAdd($menuFollowIdEdit->parent_id);
-        return view('menus.edit', compact('optionSelect', 'menuFollowIdEdit'));
+        return view('admin.menus.edit', compact('optionSelect', 'menuFollowIdEdit'));
     }
 
     public function update($id, Request $request)

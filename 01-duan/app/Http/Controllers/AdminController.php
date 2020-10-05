@@ -2,19 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use App\Category;
+use Illuminate\Support\Facades\Auth\Admin;
 
 class AdminController extends Controller
 {
 
     public function loginAdmin()
     {
-        if(auth()->check()){
-            return redirect()->to('home');
-        }
+
         return view ('login');
+        // dd(Hash::make('123456'));
 
     }
     public function postLoginAdmin(Request $request)
@@ -24,7 +25,6 @@ class AdminController extends Controller
             'email' => $request->email,
             'password'=> $request->password
         ];
-        dd($data);
         if(Auth::attempt($data, $remember)){
             return redirect()->to('home');
         };
