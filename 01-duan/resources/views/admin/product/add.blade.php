@@ -33,6 +33,14 @@
                             <input type="text" class="form-control" name="price" placeholder="Nhập giá sản phẩm">
                         </div>
                         <div class="form-group">
+                            <label>Status</label>
+                            <input type="text" class="form-control" name="status" placeholder="Nhập status">
+                        </div>
+                        <div class="form-group">
+                            <label>Sale</label>
+                            <input type="text" class="form-control" name="sale" placeholder="Nhập Sale">
+                        </div>
+                        <div class="form-group">
                             <label>Ảnh đại diện sản phẩm</label>
                             <input type="file" class="form-control-file" id="feature_image_path" name="feature_image_path" placeholder="Ảnh chi tiết">
                         </div>

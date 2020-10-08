@@ -37,6 +37,8 @@
                                 <th scope="col">#</th>
                                 <th scope="col">Tên Sản Phẩm</th>
                                 <th scope="col">Giá</th>
+                                <th scope="col">status</th>
+                                <th scope="col">sale</th>
                                 <th scope="col">Hình ảnh</th>
                                 <th scope="col">Danh mục</th>
                                 <th scope="col">Action</th>
@@ -48,6 +50,8 @@
                                 <th scope="row">{{$productItem->id }}</th>
                                 <td>{{$productItem->name}}</td>
                                 <td>{{$productItem->price}}</td>
+                                <td>{{$productItem->status}}</td>
+                                <td>{{$productItem->sale}}</td>
                                 <td>
                                     <img class="product_image_150_100" src="{{$productItem->feature_image_path}}" alt="">
                                 </td>

@@ -78,6 +78,8 @@ class ProductController extends Controller
             $dataProductCreate = [
                 'name' => $request->name,
                 'price' => $request->price,
+                'status' => $request->status,
+                'sale' => $request->sale,
                 'content' => $request->contents,
                 'user_id' => auth()->id(),
                 'category_id' => $request->parent_id,
@@ -88,7 +90,7 @@ class ProductController extends Controller
                 $dataProductCreate['feature_image_path'] = $dataUploadFeatureImage['file_path'];
             }
             $product = $this->product->create($dataProductCreate);
-
+            
 
             if ($request->hasFile('image_path')) {
                 foreach ($request->image_path as $fileItem) {
@@ -154,6 +156,8 @@ class ProductController extends Controller
             $dataProductUpdate = [
                 'name' => $request->name,
                 'price' => $request->price,
+                'status' => $request->status,
+                'sale' => $request->sale,
                 'content' => $request->contents,
                 'user_id' => auth()->id(),
                 'category_id' => $request->parent_id,

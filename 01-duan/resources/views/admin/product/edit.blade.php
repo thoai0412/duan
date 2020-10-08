@@ -33,6 +33,28 @@
                             <label>giá sản phẩm</label>
                             <input type="text" class="form-control" name="price" placeholder="Nhập giá sản phẩm" value="{{$product->price}}">
                         </div>
+
+                        
+
+
+
+                        <div class="form-group">
+                            <label>status</label>
+                            <input type="text" class="form-control" name="status" placeholder="Nhập status" value="{{$product->status}}">
+                        </div>
+                        <div class="form-group">
+                            <label>sale</label>
+                            <input type="text" class="form-control" name="sale" placeholder="Nhập sale" value="{{$product->sale}}">
+                        </div>
+
+
+
+
+
+
+
+
+
                         <div class="form-group">
                             <label>Ảnh đại diện sản phẩm</label>
                             <input type="file" class="form-control-file" id="feature_image_path" name="feature_image_path" placeholder="Ảnh chi tiết">
