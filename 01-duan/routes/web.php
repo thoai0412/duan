@@ -97,4 +97,9 @@ Route::prefix('admin')->group(function () {
         ]);
 
     });
+
+    Route::resource('sliders', 'SliderController');
+
+    Route::resource('settings', 'SettingController');
+
 });

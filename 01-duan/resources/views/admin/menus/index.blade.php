@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-<title>Trang Chu</title>
+<title>Menus</title>
 @endsection
 
 @section('content')
@@ -25,7 +25,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                        @foreach($menu as $menu)
+                        @foreach($menus as $menu)
                             <tr>
                                 <th scope="row">{{$menu->id}}</th>
                                 <td>{{$menu->name}}</td>
@@ -39,8 +39,9 @@
                     </table>
                 </div>
                 <div class="col-md-12">
+                {{$menus->links() }}
                 </div>
-                {{$menu->links() }}
+
             </div>
         </div>
     </div>

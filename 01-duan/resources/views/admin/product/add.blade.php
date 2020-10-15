@@ -65,7 +65,7 @@
 
                         <div class="form-group ">
                             <label class="text-uppercase font-weight-bold" for="content">Content:</label>
-                            <textarea rows="50" cols="50"  name="contents" id="content" placeholder="Description"></textarea>
+                            <textarea rows="200" cols="200"  name="contents" id="content" placeholder="Description"></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>

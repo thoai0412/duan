@@ -10,11 +10,7 @@ use Illuminate\Support\Str;
 
 class MenuController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     private $menuRecusive;
     private $menu;
 
@@ -27,8 +23,8 @@ class MenuController extends Controller
 
     public function index()
     {
-        $menu = $this->menu->paginate(10);
-        return view('admin.menus.index', compact('menu'));
+        $menus = $this->menu->paginate(5);
+        return view('admin.menus.index', compact('menus'));
     }
 
     /**
