@@ -18,7 +18,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-8">
-                    <form action="{{route('sliders.update',$slider->id)}}}" method="POST" enctype="multipart/form-data">
+                    <form action="{{route('sliders.update',$slider->id)}}" method="POST" enctype="multipart/form-data">
                         <input type="hidden" name="_token" value="{{csrf_token()}}">
                         <input type="hidden" name="_method" value="put" />
                         <div class="form-group">

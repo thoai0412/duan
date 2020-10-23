@@ -8,6 +8,12 @@
 <link rel="stylesheet" href="{{asset('admins/product/imageIndexList.css') }}">
 @endsection
 
+
+@section('js')
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script src="{{asset('/admins/mainjs/main.js') }}"></script>
+<!-- js delete -->
+@endsection
 @section('content')
 
 <!-- Content Wrapper. Contains page content -->
@@ -50,7 +56,7 @@
                                             Edit
                                         </button>
                                     </form>
-
+           
                                     <form action="{{route('sliders.destroy',$slider->id)}}" method="post">
                                         <input type="hidden" name="_token" value="{{csrf_token()}}">
                                         <input type="hidden" name="_method" value="delete">

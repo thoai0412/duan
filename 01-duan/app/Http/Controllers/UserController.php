@@ -2,12 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Role;
 use App\User;
+use DB;
+use Exception;
+use Hash;
 use Illuminate\Http\Request;
+use Log;
 
 class UserController extends Controller
 {
-
+    private $user;
+    private $role;
+    public function __construct(User $user, Role $role)
+    {
+        $this->user = $user;
+        $this->role = $role;
+    }
 
     /**
      * Display a listing of the resource.
@@ -16,7 +27,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $users = $this->user->paginate(10);
+        return view('admin.user.index', compact('users'));
     }
 
     /**
@@ -26,7 +38,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        $roles = $this->role->all();
+        return view('admin.user.add', compact('roles'));
     }
 
     /**
@@ -37,9 +50,23 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        try{
+            DB::beginTransaction();
+            $user = $this->user->create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+            ]);
+            $user->roles()->attach($request->role_id);
+            DB::commit();
+            return redirect()->route('user.index');
+        } catch(\Exception $exception) {
+            DB::rollBack();
+            Log::error('message:', $exception->getMessage().'--- Line:' . $exception->getLine());
+        }
+        
 
+    }
     /**
      * Display the specified resource.
      *
@@ -57,9 +84,12 @@ class UserController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit($id)
     {
-        //
+        $roles = $this->role->all();
+        $user = $this->user->find($id);
+        $rolesOfUser = $user->roles;
+        return view('admin.user.edit', compact('roles','user', 'rolesOfUser'));
     }
 
     /**
@@ -69,9 +99,25 @@ class UserController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, $id)
     {
-        //
+        // dd($request->all());
+        try{
+            DB::beginTransaction();
+            $this->user->find($id)->update([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+            ]);
+            $user = $this->user->find($id);
+            $user->roles()->sync($request->role_id);
+            DB::commit();
+            return redirect()->route('users.index');
+        } catch(\Exception $exception) {
+            DB::rollBack();
+            Log::error('message:', $exception->getMessage().'--- Line:' . $exception->getLine());
+        }
+        
     }
 
     /**
@@ -82,6 +128,7 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $user->delete();
+        return redirect()->route('settings.index');
     }
 }

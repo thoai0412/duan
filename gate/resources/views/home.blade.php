@@ -13,8 +13,10 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
                     You are logged in!
+                    @can('is-admin')
+                    <a href="{{route('admin')}}">Admin</a>
+                    @endcan
                 </div>
             </div>
         </div>

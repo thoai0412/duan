@@ -38,14 +38,6 @@
 
 
 
-                        <div class="form-group">
-                            <label>status</label>
-                            <input type="text" class="form-control" name="status" placeholder="Nhập status" value="{{$product->status}}">
-                        </div>
-                        <div class="form-group">
-                            <label>sale</label>
-                            <input type="text" class="form-control" name="sale" placeholder="Nhập sale" value="{{$product->sale}}">
-                        </div>
 
 
 

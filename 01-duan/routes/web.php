@@ -9,6 +9,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Auth::routes();
 
 Route::get('/home', function () {
     return view('home');
@@ -21,11 +22,13 @@ Route::prefix('admin')->group(function () {
     Route::prefix('categories')->group(function () {
         route::get('/', [
             'as' => 'categories.index',
-            'uses' => 'CategoryController@index'
+            'uses' => 'CategoryController@index',
+            'middleware' => ('can:category-list')
         ]);
         route::get('/create', [
             'as' => 'categories.create',
-            'uses' => 'CategoryController@create'
+            'uses' => 'CategoryController@create',
+            'middleware' => ('can:category-add')
         ]);
         route::post('/store', [
             'as' => 'categories.store',
@@ -33,11 +36,13 @@ Route::prefix('admin')->group(function () {
         ]);
         route::get('/edit/{id}', [
             'as' => 'categories.edit',
-            'uses' => 'CategoryController@edit'
+            'uses' => 'CategoryController@edit',
+            'middleware' => ('can:category-edit')
         ]);
         route::get('/delete/{id}', [
             'as' => 'categories.delete',
-            'uses' => 'CategoryController@delete'
+            'uses' => 'CategoryController@delete',
+            'middleware' => ('can:category-delete')
         ]);
         route::post('/update/{id}', [
             'as' => 'categories.update',
@@ -47,7 +52,9 @@ Route::prefix('admin')->group(function () {
     Route::prefix('menu')->group(function () {
         route::get('/', [
             'as' => 'menus.index',
-            'uses' => 'MenuController@index'
+            'uses' => 'MenuController@index',
+            'middleware' => ('can:list-menu')
+
         ]);
         route::get('/create', [
             'as' => 'menus.create',
@@ -74,6 +81,7 @@ Route::prefix('admin')->group(function () {
         route::get('/', [
             'as' => 'product.index',
             'uses' => 'ProductController@index',
+            'middleware' => ('can:product-list')
         ]);
         route::get('/create', [
             'as' => 'product.create',
@@ -95,11 +103,29 @@ Route::prefix('admin')->group(function () {
             'as' => 'product.delete',
             'uses' => 'ProductController@delete'
         ]);
-
     });
 
-    Route::resource('sliders', 'SliderController');
+    // Route::group(['middleware' => 'auth'], function() {
+    //     Route::resource('task', 'TaskController');
+    //   });
 
-    Route::resource('settings', 'SettingController');
+    Route::resource('sliders', 'SliderController')->middleware(['can:slider']);
 
+    Route::resource('settings', 'SettingController')->middleware(['can:setting-view','can:setting-create','can:setting-update']);
+
+    // Route::group(['middleware' => 'setting-role'], function() {
+
+    //     Route::resource('settings', 'SettingController');
+    // });
+
+
+
+
+    // Route::post('/sliders',function(){
+    //     return 'hello';
+    // })->name('sliders.store');
+    Route::resource('users', 'UserController');
+    Route::resource('roles', 'RoleController');
+
+    Route::resource('permissions', 'PermissionController');
 });

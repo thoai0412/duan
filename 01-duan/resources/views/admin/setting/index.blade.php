@@ -63,15 +63,14 @@
                                 <td>{{$setting->config_key}}</td>
                                 <td>{{$setting->config_value}}
                                 </td>
-
                                 <td class="d-flex align-items-center">
-
-                                    <form action="" method="get">
+                                    <form action="{{route('settings.edit', $setting->id)}} " method="get">
+                                        <input type="hidden" name="type" value="{{$setting->type}}">
                                         <button class="btn btn-default">
                                             Edit
                                         </button>
                                     </form>
-                                    <form action="" method="post">
+                                    <form action="{{route('settings.destroy',$setting->id)}}" method="post">
                                         <input type="hidden" name="_token" value="{{csrf_token()}}">
                                         <input type="hidden" name="_method" value="delete">
                                         <button class="btn btn-danger">

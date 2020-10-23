@@ -4,8 +4,13 @@
 <title>Add Product</title>
 @endsection
 @section('css')
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+<link rel="stylesheet" href="{{asset('admins/product/bootstrap.min.css')}}">
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+<style>
+    .select2-selection__choice{
+        background-color: #0c525d !important;
+    }
+</style>
 @endsection
 
 
@@ -32,14 +37,7 @@
                             <label>giá sản phẩm</label>
                             <input type="text" class="form-control" name="price" placeholder="Nhập giá sản phẩm">
                         </div>
-                        <div class="form-group">
-                            <label>Status</label>
-                            <input type="text" class="form-control" name="status" placeholder="Nhập status">
-                        </div>
-                        <div class="form-group">
-                            <label>Sale</label>
-                            <input type="text" class="form-control" name="sale" placeholder="Nhập Sale">
-                        </div>
+
                         <div class="form-group">
                             <label>Ảnh đại diện sản phẩm</label>
                             <input type="file" class="form-control-file" id="feature_image_path" name="feature_image_path" placeholder="Ảnh chi tiết">
@@ -51,13 +49,14 @@
 
                         <div class="form-group">
                             <label>Chọn danh mục</label>
-                            <select class="form-control" name="parent_id">
-                                <option value="0">Chọn danh Mục</option>
+                            <select class="form-control tags_select2" name="parent_id">
+                                <option value="">Chọn danh Mục</option>
                                 {!!$htmlOption!!}
                             </select>
                         </div>
 
                         <div class="form-group">
+
                             <label>Nhập tag cho sản phẩm</label>
                             <select name="tags[]" class="form-control tags_select_choose" multiple="multiple">
                             </select>
@@ -65,7 +64,7 @@
 
                         <div class="form-group ">
                             <label class="text-uppercase font-weight-bold" for="content">Content:</label>
-                            <textarea rows="200" cols="200"  name="contents" id="content" placeholder="Description"></textarea>
+                            <textarea rows="200" cols="200" name="contents" id="content" placeholder="Description"></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
@@ -77,9 +76,9 @@
 @endsection
 
 @section('js')
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 <script src="https://cdn.ckeditor.com/ckeditor5/20.0.0/classic/ckeditor.js"></script>
 
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 
 
 <script src="{{ asset('admins/product/add/add.js') }}"></script>

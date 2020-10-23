@@ -13,14 +13,14 @@
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    @include('partials.content-header', ['name' => 'Slider', 'key'=> 'Add'])
+    @include('partials.content-header', ['name' => 'Setting', 'key'=> 'Edit'])
     <!-- truyền các key tương ứng sau do sang content-header nhan 2 gia tri   -->
 
     <div class="content">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-8">
-                <form action="{{route('settings.store')}}" method="POST" enctype="multipart/form-data">
+                <form action="{{route('settings.store'). '?type=' . request()->type}}" method="POST" enctype="multipart/form-data">
                         {{ csrf_field() }}
                         
                         

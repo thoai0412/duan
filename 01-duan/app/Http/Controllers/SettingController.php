@@ -66,9 +66,10 @@ class SettingController extends Controller
      * @param  \App\Setting  $setting
      * @return \Illuminate\Http\Response
      */
-    public function edit(Setting $setting)
+    public function edit($id)
     {
-        //
+        $setting = $this->setting->find($id);
+        return view('admin.setting.edit', compact('setting'));
     }
 
     /**
@@ -80,7 +81,14 @@ class SettingController extends Controller
      */
     public function update(Request $request, Setting $setting)
     {
-        //
+        // $this->setting->find($id)->update([
+        //     'config_key' => $request->config_key,
+        //     'config_value' => $request->config_valie,
+        // ]);
+        $setting->config_key= $request->config_key;
+        $setting->config_value=$request->config_value;
+        $setting->save();
+        return redirect()->route('settings.index');
     }
 
     /**
@@ -91,6 +99,7 @@ class SettingController extends Controller
      */
     public function destroy(Setting $setting)
     {
-        //
+        $setting->delete();
+        return redirect()->route('settings.index');
     }
 }
